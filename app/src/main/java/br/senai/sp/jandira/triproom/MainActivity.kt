@@ -16,20 +16,20 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.triproom.ui.theme.TripRoomTheme
+import java.nio.file.WatchEvent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,7 +140,6 @@ fun TripRoomLogin() {
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .width(327.dp)
-                        .height(58.dp)
                 )
                 OutlinedTextField(
                     value = "",
@@ -156,7 +156,6 @@ fun TripRoomLogin() {
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .width(327.dp)
-                        .height(58.dp)
                 )
             }
 
@@ -238,7 +237,8 @@ fun TripRoomLogin() {
 @Composable
 fun  TripRoomSignUp(){
     Column (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ){
         Row(
@@ -297,23 +297,159 @@ fun  TripRoomSignUp(){
                     shape = CircleShape,
                     CardDefaults.cardColors(containerColor = Color(0xff1D213B))
                 ) {
-                    Icon(
-                        imageVector = Icons.Filled.Person,
-                        tint = Color.White,
-                        contentDescription = "imagem de um email",
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                    )
+//                    Icon(
+//                        imageVector = Icons.Filled.Person,
+//                        tint = Color.White,
+//                        contentDescription = "imagem de um email",
+//                        modifier = Modifier
+//                            .padding(start = 10.dp)
+//                    )
                 }
 
+            }
+            Column (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(340.dp)
+                    .padding(top = 30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
+            ){
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = { },
+                    label = {
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "imagem de um email",
+                                modifier = Modifier
+                                .padding(start = 10.dp)
+                    )
+                            Text(
+                                text = "Username",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFED4D5E),
+                        unfocusedBorderColor = Color(0xFFED4D5E)
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .width(327.dp)
+                )
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = { },
+                    label = {
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Phone,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "imagem de um email",
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                            )
+                            Text(
+                                text = "Phone",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFED4D5E),
+                        unfocusedBorderColor = Color(0xFFED4D5E)
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .width(327.dp)
+                )
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = { },
+                    label = {
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Email,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "imagem de um email",
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                            )
+                            Text(
+                                text = "E-mail",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFED4D5E),
+                        unfocusedBorderColor = Color(0xFFED4D5E)
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .width(327.dp)
+                )
+                OutlinedTextField(
+                    value = "",
+                    onValueChange = { },
+                    label = {
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Lock,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "imagem de um email",
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                            )
+                            Text(
+                                text = "Password",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFED4D5E),
+                        unfocusedBorderColor = Color(0xFFED4D5E)
+                    ),
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .width(327.dp)
+                )
+            }
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 19.dp, top = 15.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ){
+                Checkbox(
+                    checked = true,
+                    onCheckedChange = { }
+                )
+                Text(text = "Over 18?")
             }
 
 
 
 
         }
-        
-
 
 
 
