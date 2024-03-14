@@ -1,8 +1,11 @@
 package br.senai.sp.jandira.triproom
 
 import android.os.Bundle
+import android.widget.HorizontalScrollView
+import android.widget.ScrollView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,16 +18,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -39,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.widget.NestedScrollView
 import br.senai.sp.jandira.triproom.ui.theme.TripRoomTheme
 import java.nio.file.WatchEvent
 
@@ -131,7 +139,22 @@ fun TripRoomLogin() {
                     value = "",
                     onValueChange = {},
                     label = {
-                        Text(text = "E-mail")
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Email,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "ícone de um email",
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                            )
+                            Text(
+                                text = "E-mail",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
@@ -145,9 +168,22 @@ fun TripRoomLogin() {
                     value = "",
                     onValueChange = { },
                     label = {
-                        Text(text = "Password")
-
-
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Icon(
+                                imageVector = Icons.Filled.Lock,
+                                tint = Color(0xFFED4D5E),
+                                contentDescription = "ícone de um cadeado",
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                            )
+                            Text(
+                                text = "Password",
+                                modifier = Modifier
+                                    .padding(start = 18.dp)
+                            )
+                        }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
@@ -258,12 +294,11 @@ fun  TripRoomSignUp(){
             }
         }
         Column (
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxWidth()
         ){
             Column (
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 18.dp),
+                    .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             )
@@ -287,7 +322,7 @@ fun  TripRoomSignUp(){
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 25.dp),
+                    .padding(top = 15.dp),
                 horizontalArrangement = Arrangement.Center
             ){
                 Card(
@@ -295,16 +330,28 @@ fun  TripRoomSignUp(){
                         .width(99.dp)
                         .height(99.dp),
                     shape = CircleShape,
-                    CardDefaults.cardColors(containerColor = Color(0xff1D213B))
+                    CardDefaults.cardColors(containerColor = Color(0xffF6F6F6)),
+                    border = BorderStroke(2.dp, color = Color(0xffED4D5E))
                 ) {
-//                    Icon(
-//                        imageVector = Icons.Filled.Person,
-//                        tint = Color.White,
-//                        contentDescription = "imagem de um email",
-//                        modifier = Modifier
-//                            .padding(start = 10.dp)
-//                    )
+                    Icon(
+                        imageVector = Icons.Outlined.Person,
+                        tint = Color(0xffED4D5E),
+                        contentDescription = "ícone de uma pessoa",
+                        modifier = Modifier
+                            .padding(start = 18.dp, top = 14.dp)
+                            .height(64.dp)
+                            .width(64.dp)
+                    )
                 }
+//                Icon(
+//                    imageVector = Icons.Filled.AddCircle,
+//                    tint = Color(0xff1D213B),
+//                    contentDescription = "ícone de um circulo para adicionar",
+//                    modifier = Modifier
+//                        .padding(top = 40.dp)
+//                        .height(28.dp)
+//                        .width(28.dp)
+//                )
 
             }
             Column (
@@ -325,7 +372,7 @@ fun  TripRoomSignUp(){
                             Icon(
                                 imageVector = Icons.Filled.Person,
                                 tint = Color(0xFFED4D5E),
-                                contentDescription = "imagem de um email",
+                                contentDescription = "ícone de uma pessoa",
                                 modifier = Modifier
                                 .padding(start = 10.dp)
                     )
@@ -354,7 +401,7 @@ fun  TripRoomSignUp(){
                             Icon(
                                 imageVector = Icons.Filled.Phone,
                                 tint = Color(0xFFED4D5E),
-                                contentDescription = "imagem de um email",
+                                contentDescription = "ícone de um telefone",
                                 modifier = Modifier
                                     .padding(start = 10.dp)
                             )
@@ -383,7 +430,7 @@ fun  TripRoomSignUp(){
                             Icon(
                                 imageVector = Icons.Filled.Email,
                                 tint = Color(0xFFED4D5E),
-                                contentDescription = "imagem de um email",
+                                contentDescription = "ícone de um email",
                                 modifier = Modifier
                                     .padding(start = 10.dp)
                             )
@@ -412,7 +459,7 @@ fun  TripRoomSignUp(){
                             Icon(
                                 imageVector = Icons.Filled.Lock,
                                 tint = Color(0xFFED4D5E),
-                                contentDescription = "imagem de um email",
+                                contentDescription = "ícone de um cadeado",
                                 modifier = Modifier
                                     .padding(start = 10.dp)
                             )
@@ -432,6 +479,7 @@ fun  TripRoomSignUp(){
                         .width(327.dp)
                 )
             }
+
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
@@ -440,20 +488,77 @@ fun  TripRoomSignUp(){
                 horizontalArrangement = Arrangement.Start
             ){
                 Checkbox(
-                    checked = true,
-                    onCheckedChange = { }
+                    checked = false,
+                    onCheckedChange = {},
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFFED4D5E),
+                        uncheckedColor = Color(0xFFED4D5E)
+                    )
+
                 )
                 Text(text = "Over 18?")
             }
-
-
-
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .width(327.dp)
+                        .height(48.dp)
+                        .background(
+                            color = Color(0xFFED4D5E),
+                            shape = RoundedCornerShape(16.dp)
+                        ),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFED4D5E))
+                ){
+                    Text(
+                        text = "CREATE ACCOUNT",
+                        fontWeight = FontWeight.W900,
+                        fontFamily = FontFamily.SansSerif
+                    )
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .align(alignment = Alignment.End)
+                    .padding(end = 40.dp, top = 12.dp)
+            ) {
+                Text(
+                    text = "Already have an account?",
+                    color = Color.Gray,
+                    fontWeight = FontWeight.W300,
+                    fontSize = 12.sp
+                )
+                Text(
+                    text = "Sign in",
+                    color = Color(0xFFED4D5E),
+                    fontWeight = FontWeight.W700,
+                    fontSize = 12.sp
+                )
+            }
 
         }
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Row(
+                modifier = Modifier
+                    .height(40.dp)
+                    .width(120.dp)
+                    .background(
+                        color = Color(0xFFED4D5E),
+                        shape = RoundedCornerShape(topEnd = 16.dp)
+                    )
+            ) {
 
-
-
-
+            }
+        }
     }
 
 }
@@ -470,6 +575,7 @@ fun  TripRoomSignUp(){
 fun TripRoomPreview() {
     TripRoomTheme {
         TripRoomSignUp()
+//        TripRoomLogin()
 
     }
 }
