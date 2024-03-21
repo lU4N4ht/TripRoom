@@ -6,6 +6,7 @@ import android.widget.ScrollView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,6 +43,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -563,7 +567,90 @@ fun  TripRoomSignUp(){
 
 }
 
+@Composable
+fun TripRoomHome(){
+    Column(
+        modifier = Modifier
+            .height(197.dp)
+            .fillMaxWidth()
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.homebg),
+            contentDescription = "imagem da torre eiffel",
+            contentScale = ContentScale.Crop
+        )
+    }
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(197.dp)
+            .padding(horizontal = 19.dp)
+            .padding(top = 13.dp, bottom = 7.dp),
+        verticalArrangement = Arrangement.SpaceBetween
 
+    ){
+        Row (
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
+        ){
+            Column (
+               horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                Card(
+                    modifier = Modifier
+                        .width(61.dp)
+                        .height(61.dp),
+                    shape = CircleShape,
+                    border = BorderStroke(2.dp, color = Color(0xFFFFFFFF))
+                ){
+                    Image(
+                        painter = painterResource(id = R.drawable.profileimg),
+                        contentDescription = "imagem de uma mulher",
+                        contentScale = ContentScale.Crop
+                    )
+
+                }
+                Text(
+                    text = "Susanna Hoffs",
+                    color = Color.White,
+                    fontWeight = FontWeight.W400,
+                    fontSize = 12.sp
+                )
+            }
+        }
+
+        Column (
+            horizontalAlignment = Alignment.Start
+        ){
+            Row (
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(
+                    imageVector = Icons.Default.Place,
+                    contentDescription = "ícone de localização",
+                    tint = Color.White
+                )
+                Text(
+                    text = "You're in Paris",
+                    color = Color.White,
+                    fontSize = 14.sp
+                )
+            }
+            Text(
+                text = "My Trips",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.W700,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(start = 8.dp)
+            )
+        }
+
+    }
+
+}
 
 
 
@@ -574,8 +661,9 @@ fun  TripRoomSignUp(){
 @Composable
 fun TripRoomPreview() {
     TripRoomTheme {
-        TripRoomSignUp()
+//        TripRoomSignUp()
 //        TripRoomLogin()
+        TripRoomHome()
 
     }
 }
