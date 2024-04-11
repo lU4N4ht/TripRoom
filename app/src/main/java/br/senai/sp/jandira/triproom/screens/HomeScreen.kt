@@ -6,15 +6,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
@@ -30,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -129,15 +133,16 @@ fun HomeScreen(){
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 17.dp, top = 13.dp)
+                .padding(top = 13.dp)
                 .background(
                     color = Color(0xfff6f6f6)
                 ),
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.Top
         ){
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(start = 17.dp, top = 13.dp)
             ){
                 Text(
                     text = "Categories",
@@ -149,7 +154,8 @@ fun HomeScreen(){
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 7.dp)
+                    .padding(top = 7.dp),
+                horizontalArrangement = Arrangement.Center
             ){
                 item{
                     Card(
@@ -159,7 +165,7 @@ fun HomeScreen(){
                             .padding(end = 8.dp),
                         colors = CardDefaults
                             .cardColors(
-                                containerColor = Color(0xffCF06F0)
+                                containerColor = Color(0xFFED4D5E)
                             )
                     )  {
                         Column (
@@ -199,7 +205,7 @@ fun HomeScreen(){
                             .padding(end = 8.dp),
                         colors = CardDefaults
                             .cardColors(
-                                containerColor = Color(0xffEAABF4)
+                                containerColor = Color(0xFFF8B1B9)
                             )
                     )  {
                         Column (
@@ -239,7 +245,7 @@ fun HomeScreen(){
                             .padding(end = 8.dp),
                         colors = CardDefaults
                             .cardColors(
-                                containerColor = Color(0xffEAABF4)
+                                containerColor = Color(0xFFF8B1B9)
                             )
                     )  {
                         Column (
@@ -274,6 +280,7 @@ fun HomeScreen(){
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -307,7 +314,8 @@ fun HomeScreen(){
                         },
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = Color(0x00ED4D5E),
-                            unfocusedBorderColor = Color(0x00ED4D5E)
+                            unfocusedBorderColor = Color(0x00ED4D5E),
+                            focusedTextColor = Color.Black
                         ),
                         modifier = Modifier
                             .width(190.dp)
@@ -322,10 +330,190 @@ fun HomeScreen(){
 
                 }
             }
-            Text(text = "Past Trips")
+            Spacer(modifier = Modifier.height(20.dp))
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 17.dp)
+            ){
+                Text(
+                    text = "Past Trips",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.W400,
+                    color = Color(0xff565454)
+                )
+
+            }
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 9.dp, bottom = 9.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ){
+                item{
+                    Card(
+                        modifier = Modifier
+                            .width(325.dp)
+                            .height(208.dp),
+                        colors = CardDefaults
+                            .cardColors(
+                                containerColor = Color(0xFFFFFFFF)
+                            )
+                    )  {
+                        Column (
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(5.dp),
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ){
+                            Row (
+                                modifier = Modifier
+                                    .width(315.dp)
+                                    .height(106.dp),
+                                horizontalArrangement = Arrangement.Center
+
+                            ){
+                                Image(
+                                    painter = painterResource(id = R.drawable.london),
+                                    contentDescription = "imagem da torre eiffel",
+                                    contentScale = ContentScale.FillWidth
+                                )
+                            }
+                            Row (
+                                modifier = Modifier
+                            ){
+                                Text(
+                                    text = "London, 2019",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xFFED4D5E)
+
+                                )
+                            }
+                            Row {
+                                Text(
+                                    text = "London is the capital and largest city of  the United Kingdom, with a population of just under 9 million.",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xffA09C9C)
+                                )
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(end = 11.dp, bottom = 11.dp),
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                Text(
+                                    text = "18 Feb - 21 Feb",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xFFED4D5E)
+                                )
+                            }
+
+                        }
+                    }
+
+                    Card(
+                        modifier = Modifier
+                            .width(325.dp)
+                            .height(208.dp)
+                            .padding(top = 11.dp),
+                        colors = CardDefaults
+                            .cardColors(
+                                containerColor = Color(0xFFFFFFFF)
+                            ),
+                        elevation = CardDefaults.elevatedCardElevation(4.dp)
+                    )  {
+                        Column (
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(5.dp),
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ){
+                            Row (
+                                modifier = Modifier
+                                    .width(315.dp)
+                                    .height(106.dp),
+                                horizontalArrangement = Arrangement.Center
+
+                            ){
+                                Image(
+                                    painter = painterResource(id = R.drawable.porto),
+                                    contentDescription = "imagem da torre eiffel",
+                                    contentScale = ContentScale.FillWidth
+                                )
+                            }
+                            Row (
+                                modifier = Modifier
+                            ){
+                                Text(
+                                    text = "London, 2019",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xFFED4D5E)
+
+                                )
+                            }
+                            Row {
+                                Text(
+                                    text = "London is the capital and largest city of  the United Kingdom, with a population of just under 9 million.",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xffA09C9C)
+                                )
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(end = 11.dp, bottom = 11.dp),
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                Text(
+                                    text = "18 Feb - 21 Feb",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.W400,
+                                    color = Color(0xFFED4D5E)
+                                )
+                            }
+
+                        }
+                    }
+                }
+            }
+
         }
 
     }
+    Column (
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(end = 27.dp, bottom = 8.dp),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.End
+    ){
+        Card(
+            modifier = Modifier
+                .width(49.dp)
+                .height(49.dp),
+            shape = CircleShape,
+            border = BorderStroke(1.dp, color = Color(0xFFFFFFFF)),
+            colors = CardDefaults.cardColors(Color(0xFFED4D5E))
+        ){
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "ícone de mais",
+                tint = Color(0xFFFFFFFF),
+                modifier = Modifier
+                    .height(20.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+        }
+    }
+
 }
 
 @Preview(showSystemUi = true)

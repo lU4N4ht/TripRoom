@@ -144,7 +144,9 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
@@ -176,20 +178,27 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .width(327.dp)
                 )
             }
-
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ){
+                Text(text = mensagemErroState.value, color = Color.Red)
+            }
             Row(
                 modifier = Modifier
                     .align(alignment = Alignment.End)
                     .padding(end = 18.dp, top = 10.dp)
             ) {
-                Text(text = mensagemErroState.value, color = Color.Red)
                 Button(
                     onClick = {
                         if (emailState.value == "aluno" && passwordState.value == "1234"){

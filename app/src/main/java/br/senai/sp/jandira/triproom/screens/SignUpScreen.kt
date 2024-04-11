@@ -59,9 +59,13 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
     var passwordState = remember {
         mutableStateOf("")
     }
+    var checkBoxState = remember {
+        mutableStateOf(false)
+    }
     var mensagemErroState = remember {
         mutableStateOf("")
     }
+
 
     Column (
         modifier = Modifier
@@ -178,7 +182,9 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
@@ -209,7 +215,8 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
@@ -240,7 +247,9 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
@@ -273,7 +282,9 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFED4D5E),
-                        unfocusedBorderColor = Color(0xFFED4D5E)
+                        unfocusedBorderColor = Color(0xFFED4D5E),
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black
                     ),
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
@@ -289,8 +300,10 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                 horizontalArrangement = Arrangement.Start
             ){
                 Checkbox(
-                    checked = false,
-                    onCheckedChange = {},
+                    checked = checkBoxState.value,
+                    onCheckedChange = {
+                                      checkBoxState.value = it
+                    },
                     colors = CheckboxDefaults.colors(
                         checkedColor = Color(0xFFED4D5E),
                         uncheckedColor = Color(0xFFED4D5E)
@@ -301,11 +314,18 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
             }
             Row (
                 modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ){
+                Text(text = mensagemErroState.value, color = Color.Red)
+            }
+
+            Row (
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = mensagemErroState.value, color = Color.Red)
                 Button(
                     onClick = {
                         if (nameState.value == "" || phoneState.value == "" || emailState.value == "" || passwordState.value == ""){
