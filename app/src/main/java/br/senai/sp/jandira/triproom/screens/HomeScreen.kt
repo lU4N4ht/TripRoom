@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.triproom.R
+import br.senai.sp.jandira.triproom.repository.CategoriasRepository
 
 @Composable
 fun HomeScreen(){
@@ -345,13 +346,15 @@ fun HomeScreen(){
 
             }
 
+            val categorias = CategoriasRepository().listarTodasAsCategorias()
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 9.dp, bottom = 9.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
-                item{
+                item(){
                     Card(
                         modifier = Modifier
                             .width(325.dp)
