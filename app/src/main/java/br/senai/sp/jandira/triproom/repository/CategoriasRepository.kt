@@ -37,7 +37,7 @@ class CategoriasRepository {
         )
 
 
-        return listOf(montain, snow, beach)
+        return listOf(montain, snow, beach, city, museum)
 
 
     }

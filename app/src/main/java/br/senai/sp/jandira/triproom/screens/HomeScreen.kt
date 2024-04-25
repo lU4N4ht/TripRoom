@@ -3,7 +3,9 @@ package br.senai.sp.jandira.triproom.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -35,15 +38,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.triproom.R
 import br.senai.sp.jandira.triproom.repository.CategoriasRepository
+import br.senai.sp.jandira.triproom.repository.ViagensRepository
+import br.senai.sp.jandira.triproom.utils.encurtarData
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
     var destinoState = remember {
         mutableStateOf("")
     }
@@ -58,11 +65,11 @@ fun HomeScreen(){
             contentScale = ContentScale.Crop
         )
     }
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxSize()
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(197.dp)
@@ -70,23 +77,23 @@ fun HomeScreen(){
                 .padding(top = 13.dp, bottom = 7.dp),
             verticalArrangement = Arrangement.SpaceBetween
 
-        ){
-            Row (
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
-            ){
-                Column (
+            ) {
+                Column(
                     horizontalAlignment = Alignment.CenterHorizontally
-                ){
+                ) {
                     Card(
                         modifier = Modifier
                             .width(61.dp)
                             .height(61.dp),
                         shape = CircleShape,
                         border = BorderStroke(2.dp, color = Color(0xFFFFFFFF))
-                    ){
+                    ) {
                         Image(
                             painter = painterResource(id = R.drawable.profileimg),
                             contentDescription = "imagem de uma mulher",
@@ -103,12 +110,12 @@ fun HomeScreen(){
                 }
             }
 
-            Column (
+            Column(
                 horizontalAlignment = Alignment.Start
-            ){
-                Row (
+            ) {
+                Row(
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Icon(
                         imageVector = Icons.Default.Place,
                         contentDescription = "ícone de localização",
@@ -131,7 +138,7 @@ fun HomeScreen(){
             }
 
         }
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 13.dp)
@@ -139,12 +146,12 @@ fun HomeScreen(){
                     color = Color(0xfff6f6f6)
                 ),
             verticalArrangement = Arrangement.Top
-        ){
-            Row (
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 17.dp, top = 13.dp)
-            ){
+            ) {
                 Text(
                     text = "Categories",
                     fontSize = 14.sp,
@@ -152,13 +159,16 @@ fun HomeScreen(){
                     color = Color(0xff565454)
                 )
             }
+
+            val categorias = CategoriasRepository().listarTodasAsCategorias()
+
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 7.dp),
+                    .padding(top = 7.dp, start = 17.dp),
                 horizontalArrangement = Arrangement.Center
-            ){
-                item{
+            ) {
+                items(categorias) {
                     Card(
                         modifier = Modifier
                             .width(109.dp)
@@ -168,14 +178,14 @@ fun HomeScreen(){
                             .cardColors(
                                 containerColor = Color(0xFFED4D5E)
                             )
-                    )  {
-                        Column (
+                    ) {
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
-                        ){
-                            Card (
+                        ) {
+                            Card(
                                 modifier = Modifier
                                     .width(32.dp)
                                     .height(32.dp),
@@ -184,94 +194,14 @@ fun HomeScreen(){
                                         containerColor = Color(0x00CF06F0)
                                     )
 
-                            ){
+                            ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.montanha),
-                                    contentDescription = "ícone de uma montanha"
+                                    painter = if (it.imagem == null) painterResource(id = R.drawable.lugar) else it.imagem!!,
+                                    contentDescription = "ícone das categorias"
                                 )
                             }
                             Text(
-                                text = "Montain",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.W400,
-                                color = Color.White
-
-                            )
-                        }
-                    }
-                    Card(
-                        modifier = Modifier
-                            .width(109.dp)
-                            .height(64.dp)
-                            .padding(end = 8.dp),
-                        colors = CardDefaults
-                            .cardColors(
-                                containerColor = Color(0xFFF8B1B9)
-                            )
-                    )  {
-                        Column (
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ){
-                            Card (
-                                modifier = Modifier
-                                    .width(32.dp)
-                                    .height(32.dp),
-                                colors = CardDefaults
-                                    .cardColors(
-                                        containerColor = Color(0x00CF06F0)
-                                    )
-
-                            ){
-                                Image(
-                                    painter = painterResource(id = R.drawable.snow),
-                                    contentDescription = "ícone de uma pessoa esquiando"
-                                )
-                            }
-                            Text(
-                                text = "Snow",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.W400,
-                                color = Color.White
-
-                            )
-                        }
-                    }
-                    Card(
-                        modifier = Modifier
-                            .width(109.dp)
-                            .height(64.dp)
-                            .padding(end = 8.dp),
-                        colors = CardDefaults
-                            .cardColors(
-                                containerColor = Color(0xFFF8B1B9)
-                            )
-                    )  {
-                        Column (
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ){
-                            Card (
-                                modifier = Modifier
-                                    .width(32.dp)
-                                    .height(32.dp),
-                                colors = CardDefaults
-                                    .cardColors(
-                                        containerColor = Color(0x00CF06F0)
-                                    )
-
-                            ){
-                                Image(
-                                    painter = painterResource(id = R.drawable.beach),
-                                    contentDescription = "ícone de uma praia"
-                                )
-                            }
-                            Text(
-                                text = "Beach",
+                                text = it.nome,
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.W400,
                                 color = Color.White
@@ -287,8 +217,8 @@ fun HomeScreen(){
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
 
-            ){
-                Row (
+            ) {
+                Row(
                     modifier = Modifier
                         .height(54.dp)
                         .width(327.dp)
@@ -299,7 +229,7 @@ fun HomeScreen(){
                         ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
-                ){
+                ) {
                     OutlinedTextField(
                         value = destinoState.value,
                         onValueChange = {
@@ -332,11 +262,11 @@ fun HomeScreen(){
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 17.dp)
-            ){
+            ) {
                 Text(
                     text = "Past Trips",
                     fontSize = 14.sp,
@@ -345,59 +275,62 @@ fun HomeScreen(){
                 )
 
             }
-
-            val categorias = CategoriasRepository().listarTodasAsCategorias()
+            val viagens = ViagensRepository().listarTodasAsViagens()
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 9.dp, bottom = 9.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                item(){
+            ) {
+                items(viagens) {
                     Card(
                         modifier = Modifier
                             .width(325.dp)
-                            .height(208.dp),
+                            .height(220.dp)
+                            .padding(bottom = 12.dp),
                         colors = CardDefaults
                             .cardColors(
                                 containerColor = Color(0xFFFFFFFF)
                             )
-                    )  {
-                        Column (
+                    ) {
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(5.dp),
                             verticalArrangement = Arrangement.SpaceBetween
-                        ){
-                            Row (
+                        ) {
+                            Row(
                                 modifier = Modifier
                                     .width(315.dp)
                                     .height(106.dp),
                                 horizontalArrangement = Arrangement.Center
 
-                            ){
+                            ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.london),
-                                    contentDescription = "imagem da torre eiffel",
+                                    painter = if (it.imagem == null) painterResource(id = R.drawable.imgnotavailable) else it.imagem!!,
+                                    contentDescription = " ",
                                     contentScale = ContentScale.FillWidth
                                 )
                             }
-                            Row (
-                                modifier = Modifier
-                            ){
+                            Row {
                                 Text(
-                                    text = "London, 2019",
+                                    text = "${it.destino}, ${it.dataChegada.year}",
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.W400,
                                     color = Color(0xFFED4D5E)
 
                                 )
                             }
-                            Row {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 5.dp)
+                            ) {
                                 Text(
-                                    text = "London is the capital and largest city of  the United Kingdom, with a population of just under 9 million.",
+                                    text = it.descricao,
                                     fontSize = 10.sp,
+                                    textAlign = TextAlign.Justify,
                                     fontWeight = FontWeight.W400,
                                     color = Color(0xffA09C9C)
                                 )
@@ -409,73 +342,7 @@ fun HomeScreen(){
                                 horizontalArrangement = Arrangement.End
                             ) {
                                 Text(
-                                    text = "18 Feb - 21 Feb",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.W400,
-                                    color = Color(0xFFED4D5E)
-                                )
-                            }
-
-                        }
-                    }
-
-                    Card(
-                        modifier = Modifier
-                            .width(325.dp)
-                            .height(208.dp)
-                            .padding(top = 11.dp),
-                        colors = CardDefaults
-                            .cardColors(
-                                containerColor = Color(0xFFFFFFFF)
-                            ),
-                        elevation = CardDefaults.elevatedCardElevation(4.dp)
-                    )  {
-                        Column (
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(5.dp),
-                            verticalArrangement = Arrangement.SpaceBetween
-                        ){
-                            Row (
-                                modifier = Modifier
-                                    .width(315.dp)
-                                    .height(106.dp),
-                                horizontalArrangement = Arrangement.Center
-
-                            ){
-                                Image(
-                                    painter = painterResource(id = R.drawable.porto),
-                                    contentDescription = "imagem da torre eiffel",
-                                    contentScale = ContentScale.FillWidth
-                                )
-                            }
-                            Row (
-                                modifier = Modifier
-                            ){
-                                Text(
-                                    text = "London, 2019",
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.W400,
-                                    color = Color(0xFFED4D5E)
-
-                                )
-                            }
-                            Row {
-                                Text(
-                                    text = "London is the capital and largest city of  the United Kingdom, with a population of just under 9 million.",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.W400,
-                                    color = Color(0xffA09C9C)
-                                )
-                            }
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(end = 11.dp, bottom = 11.dp),
-                                horizontalArrangement = Arrangement.End
-                            ) {
-                                Text(
-                                    text = "18 Feb - 21 Feb",
+                                    text = "${encurtarData(it.dataChegada)} - ${encurtarData(it.dataPartida)}",
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.W400,
                                     color = Color(0xFFED4D5E)
@@ -490,28 +357,32 @@ fun HomeScreen(){
         }
 
     }
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(end = 27.dp, bottom = 8.dp),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End
-    ){
-        Card(
+    ) {
+        Box(
             modifier = Modifier
                 .width(49.dp)
-                .height(49.dp),
-            shape = CircleShape,
-            border = BorderStroke(1.dp, color = Color(0xFFFFFFFF)),
-            colors = CardDefaults.cardColors(Color(0xFFED4D5E))
-        ){
+                .height(49.dp)
+                .background(
+                    color = Color(0xFFED4D5E),
+                    shape = CircleShape
+                )
+                .border(1.dp, color = Color(0xFFFFFFFF), shape = CircleShape),
+
+
+        ) {
             Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = "ícone de mais",
                 tint = Color(0xFFFFFFFF),
                 modifier = Modifier
                     .height(20.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .align(alignment = Alignment.Center)
             )
 
         }
