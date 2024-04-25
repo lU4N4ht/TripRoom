@@ -287,7 +287,6 @@ fun HomeScreen() {
                     Card(
                         modifier = Modifier
                             .width(325.dp)
-                            .height(220.dp)
                             .padding(bottom = 12.dp),
                         colors = CardDefaults
                             .cardColors(
