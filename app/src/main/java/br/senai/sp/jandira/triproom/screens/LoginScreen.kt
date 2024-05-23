@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import br.senai.sp.jandira.triproom.model.Usuarios
 
 @Composable
 fun LoginScreen(controleDeNavegacao: NavHostController) {
@@ -51,7 +52,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
     var mensagemErroState = remember {
         mutableStateOf("")
     }
-
+    
 
     Column(
         modifier = Modifier.fillMaxSize(),

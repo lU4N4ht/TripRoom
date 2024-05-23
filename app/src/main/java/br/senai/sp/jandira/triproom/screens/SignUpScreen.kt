@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -42,9 +43,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import br.senai.sp.jandira.triproom.model.Usuarios
+import br.senai.sp.jandira.triproom.repository.UsuariosRepository
 
 @Composable
 fun  SignUpScreen(controleDeNavegacao: NavHostController) {
+
+    val ur = UsuariosRepository(LocalContext.current)
 
     //Definindo as variáveis de estado
     var nameState = remember {
@@ -332,9 +337,19 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                             mensagemErroState.value = "Preencha todos os campos!"
 
                         } else{
+
+                            val usuario = Usuarios(
+                                nome = nameState.value,
+                                telefone = phoneState.value,
+                                email = emailState.value,
+                                senha = passwordState.value,
+                                isMaiorIdade = checkBoxState.value
+                            )
+
+                            ur.salvar(usuario)
+
                             mensagemErroState.value = ""
                             controleDeNavegacao.navigate("login")
-
                         }
                     },
                     modifier = Modifier
