@@ -39,6 +39,5 @@ class CategoriasRepository {
 
         return listOf(montain, snow, beach, city, museum)
 
-
     }
 }

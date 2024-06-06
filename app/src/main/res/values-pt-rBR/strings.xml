@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_message">Por favor, faça o login para continuar</string>
+    <string name="user_password">Senha</string>
+    <string name="sign_in">Entrar</string>
+    <string name="login_change_to_sign_up">Não tem uma conta?</string>
+    <string name="sign_up">Cadastre-se</string>
+    <string name="user_name">Nome</string>
+    <string name="user_phone">Telefone</string>
+    <string name="user_over_18">Maior de 18?</string>
+    <string name="create_account">Criar conta</string>
+    <string name="sign_up_change_to_login">Já possui uma conta?</string>
+</resources>

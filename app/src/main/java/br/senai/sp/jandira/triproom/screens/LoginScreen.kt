@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -37,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import br.senai.sp.jandira.triproom.R
 import br.senai.sp.jandira.triproom.model.Usuarios
 
 @Composable
@@ -52,6 +54,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
     var mensagemErroState = remember {
         mutableStateOf("")
     }
+    var usuario = Usuarios()
     
 
     Column(
@@ -104,7 +107,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
             )
 
             Text(
-                text = "Please sign in to continue.",
+                text = stringResource(id = R.string.login_message),
                 color = Color(0xff1D213B),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.W400,
@@ -171,7 +174,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
                                     .padding(start = 10.dp)
                             )
                             Text(
-                                text = "Password",
+                                text = stringResource(id = R.string.user_password),
                                 modifier = Modifier
                                     .padding(start = 18.dp)
                             )
@@ -202,7 +205,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
             ) {
                 Button(
                     onClick = {
-                        if (emailState.value == "aluno" && passwordState.value == "1234"){
+                        if (emailState.value == usuario.email && passwordState.value == usuario.senha){
                             mensagemErroState.value = ""
 
                             controleDeNavegacao.navigate("home")
@@ -222,7 +225,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
                 )
                 {
                     Text(
-                        text = "SIGN IN",
+                        text = stringResource(id = R.string.sign_in),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.W700
                     )
@@ -243,13 +246,13 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
                     .padding(end = 18.dp, top = 28.dp)
             ) {
                 Text(
-                    text = "Don’t have an account?",
+                    text = stringResource(id = R.string.login_change_to_sign_up),
                     color = Color.Gray,
                     fontWeight = FontWeight.W300,
                     fontSize = 12.sp
                 )
                 Text(
-                    text = "Sign up",
+                    text = stringResource(id = R.string.sign_up),
                     color = Color(0xFFED4D5E),
                     fontWeight = FontWeight.W700,
                     fontSize = 12.sp,

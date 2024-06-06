@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -43,6 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import br.senai.sp.jandira.triproom.R
 import br.senai.sp.jandira.triproom.model.Usuarios
 import br.senai.sp.jandira.triproom.repository.UsuariosRepository
 
@@ -104,14 +106,14 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
             )
             {
                 Text(
-                    text = "Sign Up",
+                    text = stringResource(id = R.string.sign_up),
                     color = Color(0xFFED4D5E),
                     fontSize = 32.sp,
                     fontWeight = FontWeight.W900,
                     fontFamily = FontFamily.SansSerif
                 )
                 Text(
-                    text = "Create a new account",
+                    text = stringResource(id = R.string.create_account),
                     color = Color(0xff1D213B),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.W400,
@@ -179,7 +181,7 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                                     .padding(start = 10.dp)
                             )
                             Text(
-                                text = "Username",
+                                text = stringResource(id = R.string.user_name),
                                 modifier = Modifier
                                     .padding(start = 18.dp)
                             )
@@ -212,7 +214,7 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                                     .padding(start = 10.dp)
                             )
                             Text(
-                                text = "Phone",
+                                text = stringResource(id = R.string.user_phone),
                                 modifier = Modifier
                                     .padding(start = 18.dp)
                             )
@@ -279,7 +281,7 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                                     .padding(start = 10.dp)
                             )
                             Text(
-                                text = "Password",
+                                text = stringResource(id = R.string.user_password),
                                 modifier = Modifier
                                     .padding(start = 18.dp)
                             )
@@ -315,7 +317,7 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     )
 
                 )
-                Text(text = "Over 18?")
+                Text(text = stringResource(id = R.string.user_over_18))
             }
             Row (
                 modifier = Modifier
@@ -362,7 +364,7 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFED4D5E))
                 ){
                     Text(
-                        text = "CREATE ACCOUNT",
+                        text = stringResource(id = R.string.create_account),
                         fontWeight = FontWeight.W900,
                         fontFamily = FontFamily.SansSerif
                     )
@@ -374,13 +376,13 @@ fun  SignUpScreen(controleDeNavegacao: NavHostController) {
                     .padding(end = 40.dp, top = 12.dp)
             ) {
                 Text(
-                    text = "Already have an account?",
+                    text = stringResource(id = R.string.sign_up_change_to_login),
                     color = Color.Gray,
                     fontWeight = FontWeight.W300,
                     fontSize = 12.sp
                 )
                 Text(
-                    text = "Sign in",
+                    text = stringResource(id = R.string.sign_in),
                     color = Color(0xFFED4D5E),
                     fontWeight = FontWeight.W700,
                     fontSize = 12.sp,
