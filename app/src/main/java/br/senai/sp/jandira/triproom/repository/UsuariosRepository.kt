@@ -16,4 +16,8 @@ class UsuariosRepository (context: Context) {
         return db.listarTodosOsUsuarios()
     }
 
+    fun login(email: String, password: String): Usuarios{
+        return db.login(email, password)
+    }
+
 }

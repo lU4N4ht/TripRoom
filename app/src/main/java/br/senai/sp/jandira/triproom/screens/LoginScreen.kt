@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.triproom.R
 import br.senai.sp.jandira.triproom.model.Usuarios
+import br.senai.sp.jandira.triproom.repository.UsuariosRepository
 
 @Composable
 fun LoginScreen(controleDeNavegacao: NavHostController) {
@@ -54,7 +56,7 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
     var mensagemErroState = remember {
         mutableStateOf("")
     }
-    var usuario = Usuarios()
+    var usuario = UsuariosRepository(LocalContext.current)
     
 
     Column(
@@ -205,12 +207,18 @@ fun LoginScreen(controleDeNavegacao: NavHostController) {
             ) {
                 Button(
                     onClick = {
-                        if (emailState.value == usuario.email && passwordState.value == usuario.senha){
-                            mensagemErroState.value = ""
+                        if (emailState.value == " " || passwordState.value == ""){
 
-                            controleDeNavegacao.navigate("home")
+                            mensagemErroState.value = "Preencha os campos corretamente."
 
                         } else{
+
+                            val usuarios = usuario.login(emailState.value, passwordState.value)
+
+                            if (emailState.value == usuarios.email && passwordState.value == usuarios.senha){
+
+                                controleDeNavegacao.navigate("home")
+                            }
                             mensagemErroState.value = "E-mail ou senha incorretos!"
                         }
                               },

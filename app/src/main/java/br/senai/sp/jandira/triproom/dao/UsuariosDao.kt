@@ -24,4 +24,7 @@ interface UsuariosDao {
     @Query("SELECT * FROM tbl_usuarios WHERE id = :id")
     fun buscarUsuariosPeloId(id: Long): Usuarios
 
+    @Query("SELECT * FROM tbl_usuarios WHERE email = :email AND senha = :senha")
+    fun login(email: String, senha: String) : Usuarios
+
 }
